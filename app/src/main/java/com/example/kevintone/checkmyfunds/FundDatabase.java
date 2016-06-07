@@ -1,6 +1,7 @@
 package com.example.kevintone.checkmyfunds;
 
 import android.content.Context;
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -31,4 +32,21 @@ public class FundDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP IF TABLE EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+    public boolean addTransactionToDatabase(String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        //Example: contentValues.put(COL1, description);
+
+        long isInserted = db.insert(TABLE_NAME, null, contentValues);
+        if(isInserted == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+
+
 }
