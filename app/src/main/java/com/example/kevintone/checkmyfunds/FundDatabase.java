@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class FundDatabase extends SQLiteOpenHelper {
@@ -22,8 +24,8 @@ public class FundDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOCRIMENT, " +
-                " DESCRIPTION TEXT, DATETIME TEXT, CLASS TEXT, AMOUNT INTEGER)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (DESCRIPTION TEXT, " +
+                "DATETIME TEXT, CLASS TEXT, AMOUNT INTEGER PRIMARY KEY)";
         db.execSQL(createTable);
     }
 
@@ -39,7 +41,7 @@ public class FundDatabase extends SQLiteOpenHelper {
 
         //Example: contentValues.put(COL1, description);
         contentValues.put(COL1, description);
-        contentValues.put(COL2, dateTime);
+        contentValues.put(COL2, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         contentValues.put(COL3, classText);
         contentValues.put(COL4, amountToChange);
 
