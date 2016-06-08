@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Description of the Transaction:"
+        android:id="@+id/textViewDescription" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDescription"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter Description Here (ex. McDonalds Lunch)"
+        android:layout_below="@+id/textViewDescription"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter Amount of Transaction:"
+        android:id="@+id/textViewAmountToChange"
+        android:layout_below="@+id/editTextDescription"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextAmountToChange"
+        android:text="Enter the Amount (ex. 35.44, 115.20, etc)"
+        android:layout_below="@+id/textViewAmountToChange"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter a Classification of Transaction:"
+        android:id="@+id/textViewClassText"
+        android:layout_below="@+id/editTextAmountToChange"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextClassText"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter a Classifcation (ex. Food, Rent)"
+        android:layout_below="@+id/textViewClassText"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Transaction"
+        android:id="@+id/btnAddTransaction"
+        android:layout_below="@+id/editTextClassText"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
