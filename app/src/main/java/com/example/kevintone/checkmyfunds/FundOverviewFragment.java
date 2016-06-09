@@ -44,9 +44,10 @@ public class FundOverviewFragment extends Fragment{
             Toast.makeText(getActivity(), "Database is currently empty", Toast.LENGTH_LONG).show();
         } else {
             int i = 0;
+
             while (data.moveToNext()) {
-                transaction = new Transaction(data.getString(1), data.getString(2), data.getString(3),
-                        data.getDouble(4));
+                transaction = new Transaction(data.getString(0), data.getString(1), data.getString(2),
+                        data.getDouble(3));
                 fundHistory.add(transaction);
                 //Database Tests
                 //System.out.println();
