@@ -40,12 +40,13 @@ public class TwoColumnListAdapter extends ArrayAdapter<Transaction> {
             }
 
             if(textAmountToChange != null){
-                textAmountToChange.setText(funds.getAmountToChange().toString());
                 if(funds.getAmountToChange() < 0) {
                     //Red for NEGATIVE Decrease
+                    textAmountToChange.setText(funds.getAmountToChange().toString());
                     textAmountToChange.setTextColor(Color.RED);
                 } else {
                     //Green for POSITIVE Increase
+                    textAmountToChange.setText("+" + funds.getAmountToChange().toString());
                     textAmountToChange.setTextColor(Color.GREEN);
                 }
             }
