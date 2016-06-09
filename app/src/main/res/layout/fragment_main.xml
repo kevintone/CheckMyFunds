@@ -8,19 +8,17 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_weight="25"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="70dp"
         android:id="@+id/textDescription"/>
 
     <TextView
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_weight="75"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="70dp"
         android:id="@+id/textAmountToChange" />
 
 </LinearLayout>
