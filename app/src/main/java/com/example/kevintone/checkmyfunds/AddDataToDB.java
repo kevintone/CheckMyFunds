@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class AddDataToDB extends AppCompatActivity {
     FundDatabase myDB;
     EditText etDescription, etAmountToChange, etClassText;
-    Button btnAdd;
+    Button btnAddTransaction, btnAddFunds;
     ArrayList<Transaction> fundHistory;
     ListView listview;
     Transaction transaction;
@@ -31,9 +31,32 @@ public class AddDataToDB extends AppCompatActivity {
         etDescription = (EditText) findViewById(R.id.editTextDescription);
         etAmountToChange = (EditText) findViewById(R.id.editTextAmountToChange);
         etClassText = (EditText) findViewById(R.id.editTextClassText);
-        btnAdd = (Button) findViewById(R.id.btnAddTransaction);
+        btnAddTransaction = (Button) findViewById(R.id.btnAddTransaction);
+        btnAddFunds = (Button) findViewById(R.id.btnAddFunds);
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+        btnAddTransaction.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //A Transaction means that its a negative value ->
+                String description = etDescription.getText().toString();
+                Double amountToChange = Double.valueOf(etAmountToChange.getText().toString());
+                String classText = etClassText.getText().toString();
+                Double amountToNegative = amountToChange * 2;
+                amountToChange = amountToChange - amountToNegative;
+
+                if(description.length() != 0 && amountToChange != 0 &&
+                        classText.length() != 0) {
+                    addTransactionToDB(description, classText, amountToChange);
+                    etDescription.setText("");
+                    etAmountToChange.setText("");
+                    etClassText.setText("");
+                } else {
+                    Toast.makeText(AddDataToDB.this, "You must enter something in all fields!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        btnAddFunds.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String description = etDescription.getText().toString();
