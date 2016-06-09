@@ -12,6 +12,8 @@
         android:layout_weight="25"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:gravity="left|center"
+        android:paddingLeft="15dip"
         android:id="@+id/textDescription"/>
 
     <TextView
@@ -19,6 +21,7 @@
         android:layout_weight="75"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:gravity="left|center"
         android:id="@+id/textAmountToChange" />
 
 </LinearLayout>
