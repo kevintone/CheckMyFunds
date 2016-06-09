@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.Color;
 import java.util.ArrayList;
 
 /**
@@ -40,6 +41,13 @@ public class TwoColumnListAdapter extends ArrayAdapter<Transaction> {
 
             if(textAmountToChange != null){
                 textAmountToChange.setText(funds.getAmountToChange().toString());
+                if(funds.getAmountToChange() < 0) {
+                    //Red for NEGATIVE Decrease
+                    textAmountToChange.setTextColor(Color.RED);
+                } else {
+                    //Green for POSITIVE Increase
+                    textAmountToChange.setTextColor(Color.GREEN);
+                }
             }
         }
 
