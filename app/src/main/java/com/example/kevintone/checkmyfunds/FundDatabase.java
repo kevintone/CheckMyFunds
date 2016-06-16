@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.io.File;
 
 
 public class FundDatabase extends SQLiteOpenHelper {
@@ -18,6 +19,8 @@ public class FundDatabase extends SQLiteOpenHelper {
     public static final String COL3 = "CLASS";
     public static final String COL4 = "AMOUNT";
 
+    private double currentBalance = 0;
+
     public FundDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -25,7 +28,7 @@ public class FundDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (DESCRIPTION TEXT, " +
-                "DATETIME TEXT, CLASS TEXT, AMOUNT INTEGER PRIMARY KEY)";
+                "DATETIME TEXT, CLASS TEXT, AMOUNT REAL PRIMARY KEY)";
         db.execSQL(createTable);
     }
 
@@ -35,7 +38,7 @@ public class FundDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addTransactionToDatabase(String description, String dateTime, String classText, Double amountToChange) {
+    public boolean addTransactionToDatabase(String description, String classText, Double amountToChange) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -53,10 +56,30 @@ public class FundDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public boolean removeTransactionFromDatabase() {
+
+        return true;
+    }
+
     public Cursor getListContents() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        long size = new File(db.getPath()).length();
+        String dbQuery = "SELECT * FROM " + TABLE_NAME + " ORDER BY datetime(DATETIME) DESC Limit " + size;
+        Cursor data = db.rawQuery(dbQuery, null);
         return data;
+    }
+
+    public Double getCurrentBalance() {
+        double result;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dbQuery = "SELECT SUM(AMOUNT) FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(dbQuery, null);
+        if(data.moveToFirst()) {
+            result = data.getDouble(0);
+        } else {
+            result = 0;
+        }
+        return result;
     }
 
 

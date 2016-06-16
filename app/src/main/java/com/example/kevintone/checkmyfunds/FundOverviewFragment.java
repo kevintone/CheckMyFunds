@@ -2,24 +2,29 @@ package com.example.kevintone.checkmyfunds;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.database.Cursor;
 import java.util.ArrayList;
-import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.TextView;
+import android.graphics.Color;
+
+
+import android.support.v7.widget.RecyclerView;
 
 /**
  * Created by kevintone on 6/7/16.
  */
 public class FundOverviewFragment extends Fragment{
 
+    private static final String TAG = "FundOverviewFragment";
+    private RecycledViewFundsAdapter mFundsAdapter;
+    private RecyclerView mRecyclerView;
     FundDatabase myDB;
-    ArrayList<Transaction> fundHistory;
-    ListView listView;
+    private ArrayList<Transaction> fundHistory;
     Transaction transaction;
 
     @Override
@@ -31,11 +36,22 @@ public class FundOverviewFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedBundleInstance) {
         View rootView = inflater.inflate(R.layout.fundoverview_layout, container, false);
+        rootView.setTag(TAG);
 
-        //setContentView(R.layout.fundoverview_layout);
-        //myDB = new FundDatabase(this);
-        //setContentView(R.layout.fundoverview_layout);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycledview_funds);
+
         myDB = new FundDatabase(getActivity());
+
+        TextView textViewGetBalance = (TextView) rootView.findViewById(R.id.textViewGetCurrentBalance);
+        double currentBalance = myDB.getCurrentBalance();
+
+        if(currentBalance <= 0) {
+            textViewGetBalance.setTextColor(Color.RED);
+            textViewGetBalance.setText(String.format("%.2f", currentBalance));
+        } else {
+            textViewGetBalance.setTextColor(Color.GREEN);
+            textViewGetBalance.setText("+" +String.format("%.2f", currentBalance));
+        }
 
         Cursor data = myDB.getListContents();
         int numRows = data.getCount();
@@ -49,16 +65,12 @@ public class FundOverviewFragment extends Fragment{
                 transaction = new Transaction(data.getString(0), data.getString(1), data.getString(2),
                         data.getDouble(3));
                 fundHistory.add(transaction);
-                //Database Tests
-                //System.out.println();
-                //System.out.println();
-                //i++;
             }
 
-            TwoColumnListAdapter adapter = new TwoColumnListAdapter(getActivity(),
-                    R.layout.fragment_main, fundHistory);
-            listView = (ListView) rootView.findViewById(R.id.listview_funds);
-            listView.setAdapter(adapter);
+            mFundsAdapter = new RecycledViewFundsAdapter(fundHistory);
+            mRecyclerView.setAdapter(mFundsAdapter);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         }
         return rootView;
     }

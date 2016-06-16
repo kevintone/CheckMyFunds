@@ -4,4 +4,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_transaction_details">TransactionDetails</string>
+    <string name="add_to_db">Add Transaction to List</string>
+    <string name="current_balance">Current Usage: </string>
 </resources>

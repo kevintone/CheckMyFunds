@@ -1,9 +1,13 @@
 package com.example.kevintone.checkmyfunds;
 
+
+//import java.util.ArrayList;
+
 /**
  * Created by kevintone on 6/7/16.
  */
 public class Transaction {
+    //private ArrayList<String> allClasses;
     private String description;
     private String dateTime;
     private String classText;
@@ -13,6 +17,7 @@ public class Transaction {
         this.description = description;
         this.dateTime = dateTime;
         this.classText = classText;
+        //this.allClasses = new ArrayList<String>();
         this.amountToChange = amountToChange;
     }
 
