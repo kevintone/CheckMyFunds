@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 import java.io.File;
 
 
@@ -82,11 +83,15 @@ public class FundDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public String getAllClasses() {
+    public ArrayList<String> getUniqueClasses() {
+        ArrayList<String> toReturn = new ArrayList<String>();
         SQLiteDatabase db = this.getWritableDatabase();
         String dbQuery = "SELECT DISTINCT CLASS FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(dbQuery, null);
-        return "Random String";
+        while (data.moveToNext()) {
+            toReturn.add(data.getString(0));
+        }
+        return toReturn;
     }
 
 

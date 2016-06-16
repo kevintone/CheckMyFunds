@@ -78,12 +78,6 @@ public class RecycledViewFundsAdapter extends RecyclerView.Adapter<RecycledViewF
         viewHolder.getTextDate().setText(transaction.getDateTime());
         viewHolder.getTextDate().setTextColor(Color.GRAY);
 
-        //Get Classification
-        Random rand = new Random();
-        int r = rand.nextInt(255);
-        int g = rand.nextInt(255);
-        int b = rand.nextInt(255);
-        viewHolder.getViewClassification().setBackgroundColor(Color.rgb(r,g,b));
 
         //Get The amount of Transaction
         if(transaction.getAmountToChange() < 0) {
