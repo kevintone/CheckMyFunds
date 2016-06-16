@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by kevintone on 6/15/16.
@@ -78,7 +79,11 @@ public class RecycledViewFundsAdapter extends RecyclerView.Adapter<RecycledViewF
         viewHolder.getTextDate().setTextColor(Color.GRAY);
 
         //Get Classification
-        viewHolder.getViewClassification().setBackgroundColor(Color.BLUE);
+        Random rand = new Random();
+        int r = rand.nextInt(255);
+        int g = rand.nextInt(255);
+        int b = rand.nextInt(255);
+        viewHolder.getViewClassification().setBackgroundColor(Color.rgb(r,g,b));
 
         //Get The amount of Transaction
         if(transaction.getAmountToChange() < 0) {

@@ -38,6 +38,7 @@
 
     <TextView
         android:textSize="24sp"
+        android:paddingTop="25sp"
         android:layout_weight="33"
         android:layout_width="0dp"
         android:layout_height="70dp"

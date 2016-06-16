@@ -82,5 +82,12 @@ public class FundDatabase extends SQLiteOpenHelper {
         return result;
     }
 
+    public String getAllClasses() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String dbQuery = "SELECT DISTINCT CLASS FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(dbQuery, null);
+        return "Random String";
+    }
+
 
 }

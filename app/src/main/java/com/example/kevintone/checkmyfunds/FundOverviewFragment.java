@@ -67,6 +67,7 @@ public class FundOverviewFragment extends Fragment{
                 fundHistory.add(transaction);
             }
 
+            mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.divider));
             mFundsAdapter = new RecycledViewFundsAdapter(fundHistory);
             mRecyclerView.setAdapter(mFundsAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
