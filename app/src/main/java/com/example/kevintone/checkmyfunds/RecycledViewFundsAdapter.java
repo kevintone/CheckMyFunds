@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.HashMap;
 
 /**
  * Created by kevintone on 6/15/16.
@@ -16,6 +17,7 @@ public class RecycledViewFundsAdapter extends RecyclerView.Adapter<RecycledViewF
 
     private static String TAG = "RecycledViewFundsAdapter";
     private ArrayList<Transaction> fundHistory;
+    private HashMap<String, Integer> classificationColor;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textDescription;
@@ -56,6 +58,7 @@ public class RecycledViewFundsAdapter extends RecyclerView.Adapter<RecycledViewF
 
     public RecycledViewFundsAdapter(ArrayList<Transaction> funds) {
         this.fundHistory = funds;
+        this.classificationColor = new HashMap<String, Integer>();
     }
 
     @Override
@@ -77,6 +80,26 @@ public class RecycledViewFundsAdapter extends RecyclerView.Adapter<RecycledViewF
         //Get Date/Time
         viewHolder.getTextDate().setText(transaction.getDateTime());
         viewHolder.getTextDate().setTextColor(Color.GRAY);
+
+        /*
+         * Get a Random Color for each classification
+         * Gets a list of every Unique class and assigns it a random color (for now)
+         * When the list is populated, the classifications for repeated classes should
+         * appear the same color.
+         *
+         */
+        String dbHasClassification = transaction.getClassText();
+        Random rand = new Random();
+        if (!classificationColor.containsKey(dbHasClassification)) {
+            int r = rand.nextInt(255);
+            int g = rand.nextInt(255);
+            int b = rand.nextInt(255);
+            classificationColor.put(dbHasClassification, Color.rgb(r,g,b));
+            viewHolder.getViewClassification().setBackgroundColor(Color.rgb(r,g,b));
+        } else {
+            viewHolder.getViewClassification().setBackgroundColor(classificationColor.get(dbHasClassification));
+        }
+
 
 
         //Get The amount of Transaction

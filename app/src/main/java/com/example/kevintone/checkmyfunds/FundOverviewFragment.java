@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.graphics.Color;
@@ -61,22 +60,6 @@ public class FundOverviewFragment extends Fragment{
             textViewGetBalance.setTextColor(Color.GREEN);
             textViewGetBalance.setText("+" +String.format("%.2f", currentBalance));
         }
-
-        /*
-         * Gets a list of every Unique class and assigns it a random color (for now)
-         * When the list is populated, the classifications for repeated classes should
-         * appear the same color.
-         *
-        ArrayList<String> classificationList = myDB.getUniqueClasses();
-        Random rand = new Random();
-        for(int i = 0; i < classificationList.size(); i++) {
-            int r = rand.nextInt(255);
-            int g = rand.nextInt(255);
-            int b = rand.nextInt(255);
-            classColor.put(classificationList.get(i), Color.rgb(r,g,b));
-        }
-        View viewClassification = (View) rootView.findViewById(R.id.sidebar);
-*/
 
         Cursor data = myDB.getListContents();
         int numRows = data.getCount();
